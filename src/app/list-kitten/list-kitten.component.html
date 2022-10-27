@@ -1,0 +1,31 @@
+<h1>Bienvenue sur Kitten Story !</h1>
+
+<div class="flex-container">
+  <div class="main-container">
+    <p>Voici la liste de nos chatons :</p>
+
+    <div class="kitten-container">
+      <div *ngFor="let kitten of kittenList">
+        <div class="kitten-card">
+          <img src="{{ kitten.pic }}" alt="a kitten" (mouseover)="displayInfo = true"
+            (mouseleave)="displayInfo = false" />
+          <span *ngIf=" displayInfo">Name : {{ kitten.name }}, Race : {{ kitten.race }}, Birthday :
+            {{ kitten.birthday }}</span>
+          <button (click)="addKittenToUserList()">Add {{ kitten.name }} to your cat crew</button>
+        </div>
+
+      </div>
+    </div>
+
+    <button type="submit">
+      <a [routerLink]="['create']">Add your own kitten</a>
+    </button>
+
+    <app-create-kitten (sendNewKittenDataTokittenList)="receiveKitten($event)"></app-create-kitten>
+  </div>
+
+  <div>
+
+    <app-user-kitten [chosenKitten]="chosenKitten"></app-user-kitten>
+  </div>
+</div>
